@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>🌍 Blog</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #0a1a1f;
+      --bg-card: #102830;
+      --accent: #00f5d4;   /* turquesa */
+      --accent-dark: #06d6a0;
+      --accent-blue: #1b9aaa;
+      --text-main: #eaffff;
+      --text-muted: #80e8d6;
+    }
+
+    body {
+      background: var(--bg-main);
+      color: var(--text-main);
+      font-family: "Segoe UI", Roboto, sans-serif;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: linear-gradient(90deg, var(--accent-dark), var(--accent-blue));
+    }
+    .navbar-brand, .nav-link {
+      color: #fff !important;
+      font-weight: bold;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-card);
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,245,212,0.1);
+    }
+    .card h2, .card h5 {
+      color: var(--accent);
+    }
+
+    /* Botones */
+    .btn-custom {
+      background: linear-gradient(135deg, var(--accent), var(--accent-blue));
+      border: none;
+      color: #001;
+      font-weight: bold;
+      transition: 0.2s ease;
+    }
+    .btn-custom:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, var(--accent-dark), var(--accent-blue));
+    }
+
+    /* Posts */
+    .post-title {
+      color: var(--accent);
+    }
+    .meta {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Secciones ocultas */
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="#">🌍 Mi Blog</a>
+      <div>
+        <button class="btn btn-custom me-2" onclick="mostrar('blog')">📖 Ver Blog</button>
+        <button class="btn btn-custom" onclick="mostrar('admin')">⚙️ Admin</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Blog Público -->
+  <div id="blog" class="container py-4">
+    <h1 class="mb-4 text-center">Últimas Entradas</h1>
+    <div id="posts" class="row gy-4"></div>
+
+    <div class="card p-3 mt-4">
+      <h2 class="h4 mb-3">Conexiones</h2>
+      <ul id="socials" class="list-unstyled"></ul>
+    </div>
+  </div>
+
+  <!-- Panel Admin -->
+  <div id="admin" class="container py-4 hidden">
+    <h1 class="mb-4 text-center">Gestión de Contenido</h1>
+
+    <div class="card p-4 mb-4">
+      <h2 class="h4 mb-3">Crear nueva entrada</h2>
+      <div class="mb-3">
+        <label class="form-label">Título</label>
+        <input type="text" id="title" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Contenido</label>
+        <textarea id="content" class="form-control"></textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Tipo</label>
+        <select id="type" class="form-select">
+          <option value="anuncio">Anuncio</option>
+          <option value="youtube">YouTube</option>
+          <option value="twitch">Twitch</option>
+          <option value="imagen">Imagen</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">URL (opcional)</label>
+        <input type="text" id="url" class="form-control">
+      </div>
+      <button class="btn btn-custom" onclick="guardarEntrada()">Guardar entrada</button>
+    </div>
+
+    <div class="card p-4 mb-4">
+      <h2 class="h4 mb-3">Redes Sociales</h2>
+      <input type="text" id="youtube" class="form-control mb-2" placeholder="YouTube">
+      <input type="text" id="twitch" class="form-control mb-2" placeholder="Twitch">
+      <input type="text" id="twitter" class="form-control mb-2" placeholder="Twitter/X">
+      <input type="text" id="instagram" class="form-control mb-2" placeholder="Instagram">
+      <button class="btn btn-custom" onclick="guardarRedes()">Guardar redes</button>
+    </div>
+  </div>
+
+  <script>
+    function mostrar(seccion) {
+      document.getElementById("blog").classList.add("hidden");
+      document.getElementById("admin").classList.add("hidden");
+      document.getElementById(seccion).classList.remove("hidden");
+      if (seccion === "blog") renderizarBlog();
+    }
+
+    function guardarEntrada() {
+      let entradas = JSON.parse(localStorage.getItem("entradas")) || [];
+      const entrada = {
+        titulo: document.getElementById("title").value,
+        contenido: document.getElementById("content").value,
+        tipo: document.getElementById("type").value,
+        url: document.getElementById("url").value,
+        fecha: new Date().toLocaleString()
+      };
+      entradas.push(entrada);
+      localStorage.setItem("entradas", JSON.stringify(entradas));
+      alert("✅ Entrada guardada");
+    }
+
+    function guardarRedes() {
+      const redes = {
+        youtube: document.getElementById("youtube").value,
+        twitch: document.getElementById("twitch").value,
+        twitter: document.getElementById("twitter").value,
+        instagram: document.getElementById("instagram").value
+      };
+      localStorage.setItem("redes", JSON.stringify(redes));
+      alert("✅ Redes guardadas");
+    }
+
+    function renderizarBlog() {
+      const postsDiv = document.getElementById("posts");
+      postsDiv.innerHTML = "";
+      const entradas = JSON.parse(localStorage.getItem("entradas")) || [];
+
+      if (entradas.length === 0) {
+        postsDiv.innerHTML = "<p>No hay entradas aún.</p>";
+      } else {
+        entradas.forEach(e => {
+          let col = document.createElement("div");
+          col.className = "col-md-6";
+
+          let card = document.createElement("div");
+          card.className = "card p-3 h-100";
+
+          card.innerHTML = `
+            <h2 class="post-title h5">${e.titulo}</h2>
+            <div class="meta mb-2">${e.fecha} — ${e.tipo}</div>
+            <p>${e.contenido}</p>
+          `;
+
+          if (e.tipo === "youtube" && e.url) {
+            const id = e.url.split("v=")[1] || e.url.split("/").pop();
+            card.innerHTML += `<div class="ratio ratio-16x9 mb-2"><iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe></div>`;
+          }
+          if (e.tipo === "twitch" && e.url) {
+            const canal = e.url.split("/").pop();
+            card.innerHTML += `<div class="ratio ratio-16x9 mb-2"><iframe src="https://player.twitch.tv/?channel=${canal}&parent=${location.hostname}" allowfullscreen></iframe></div>`;
+          }
+          if (e.tipo === "imagen" && e.url) {
+            card.innerHTML += `<img src="${e.url}" class="img-fluid rounded mb-2">`;
+          }
+
+          col.appendChild(card);
+          postsDiv.appendChild(col);
+        });
+      }
+
+      const redes = JSON.parse(localStorage.getItem("redes")) || {};
+      const socialsList = document.getElementById("socials");
+      socialsList.innerHTML = "";
+      for (let [key, value] of Object.entries(redes)) {
+        if (value) {
+          let li = document.createElement("li");
+          li.innerHTML = `<a href="${value}" target="_blank" class="text-accent">${key}</a>`;
+          socialsList.appendChild(li);
+        }
+      }
+    }
+
+    // Render inicial
+    renderizarBlog();
+  </script>
+</body>
+</html>
