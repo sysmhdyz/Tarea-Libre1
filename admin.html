@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel de Administración</title>
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <div class="container">
+    <h1>⚙️ Panel de Administración</h1>
+    <div class="card">
+      <h2>Crear nueva entrada</h2>
+      <label>Título:</label>
+      <input type="text" id="title">
+      
+      <label>Contenido:</label>
+      <textarea id="content"></textarea>
+
+      <label>Tipo:</label>
+      <select id="type">
+        <option value="anuncio">Anuncio</option>
+        <option value="youtube">YouTube</option>
+        <option value="twitch">Twitch</option>
+        <option value="imagen">Imagen</option>
+      </select>
+
+      <label>URL (opcional):</label>
+      <input type="text" id="url">
+
+      <button onclick="guardarEntrada()">Guardar entrada</button>
+    </div>
+
+    <div class="card">
+      <h2>Redes Sociales</h2>
+      <label>YouTube:</label>
+      <input type="text" id="youtube">
+      <label>Twitch:</label>
+      <input type="text" id="twitch">
+      <label>Twitter/X:</label>
+      <input type="text" id="twitter">
+      <label>Instagram:</label>
+      <input type="text" id="instagram">
+      <button onclick="guardarRedes()">Guardar redes</button>
+    </div>
+
+    <p><a href="index.html">🌍 Ir al Blog Público</a></p>
+  </div>
+
+  <script>
+    function guardarEntrada() {
+      let entradas = JSON.parse(localStorage.getItem("entradas")) || [];
+      const entrada = {
+        titulo: document.getElementById("title").value,
+        contenido: document.getElementById("content").value,
+        tipo: document.getElementById("type").value,
+        url: document.getElementById("url").value,
+        fecha: new Date().toLocaleString()
+      };
+      entradas.push(entrada);
+      localStorage.setItem("entradas", JSON.stringify(entradas));
+      alert("✅ Entrada guardada");
+    }
+
+    function guardarRedes() {
+      const redes = {
+        youtube: document.getElementById("youtube").value,
+        twitch: document.getElementById("twitch").value,
+        twitter: document.getElementById("twitter").value,
+        instagram: document.getElementById("instagram").value
+      };
+      localStorage.setItem("redes", JSON.stringify(redes));
+      alert("✅ Redes guardadas");
+    }
+  </script>
+</body>
+</html>
