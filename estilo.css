@@ -1,24 +1,57 @@
 :root {
-  --bs-body-bg: #0a1a1f;      /* fondo */
-  --bs-body-color: #eaffff;   /* texto */
-  --bs-primary: #00f5d4;      /* turquesa */
-  --bs-secondary: #06d6a0;    /* verde-agua */
-  --bs-dark: #112d35;
-  --bs-card-bg: #0f2f36;
+  --bg-main: #0a1a1f;
+  --bg-card: #102830;
+  --accent: #00f5d4;   /* turquesa */
+  --accent-dark: #06d6a0;
+  --accent-blue: #1b9aaa;
+  --text-main: #eaffff;
+  --text-muted: #80e8d6;
 }
 
+body {
+  background: var(--bg-main);
+  color: var(--text-main);
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  background: linear-gradient(90deg, var(--accent-dark), var(--accent-blue));
+}
+.navbar-brand, .nav-link {
+  color: #fff !important;
+  font-weight: bold;
+}
+
+/* Cards */
 .card {
-  background-color: var(--bs-card-bg);
-  border: 1px solid var(--bs-secondary);
-  box-shadow: 0 0 12px rgba(0, 245, 212, 0.2);
+  background: var(--bg-card);
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,245,212,0.1);
+}
+.card h2, .card h5 {
+  color: var(--accent);
 }
 
-.btn-primary {
-  background-color: var(--bs-primary);
-  border-color: var(--bs-primary);
-  color: #002;
+/* Botones */
+.btn-custom {
+  background: linear-gradient(135deg, var(--accent), var(--accent-blue));
+  border: none;
+  color: #001;
+  font-weight: bold;
+  transition: 0.2s ease;
 }
-.btn-primary:hover {
-  background-color: var(--bs-secondary);
-  border-color: var(--bs-secondary);
+.btn-custom:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent-blue));
+}
+
+/* Posts */
+.post-title {
+  color: var(--accent);
+}
+.meta {
+  color: var(--text-muted);
+  font-size: 0.9rem;
 }

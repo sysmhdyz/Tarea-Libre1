@@ -2,16 +2,26 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Panel de Administración</title>
+  <title>⚙️ Panel de Administración</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
-  <div class="container py-4">
-    <h1 class="mb-4 text-primary">⚙️ Panel de Administración</h1>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="#">⚙️ Admin Blog</a>
+      <div>
+        <a href="index.html" class="btn btn-custom">🌍 Ver Blog</a>
+      </div>
+    </div>
+  </nav>
 
-    <!-- Formulario nueva entrada -->
-    <div class="card p-3 mb-4">
+  <div class="container py-4">
+    <h1 class="mb-4 text-center">Gestión de Contenido</h1>
+
+    <!-- Nueva entrada -->
+    <div class="card p-4 mb-4">
       <h2 class="h4 mb-3">Crear nueva entrada</h2>
       <div class="mb-3">
         <label class="form-label">Título</label>
@@ -34,20 +44,18 @@
         <label class="form-label">URL (opcional)</label>
         <input type="text" id="url" class="form-control">
       </div>
-      <button class="btn btn-primary" onclick="guardarEntrada()">Guardar entrada</button>
+      <button class="btn btn-custom" onclick="guardarEntrada()">Guardar entrada</button>
     </div>
 
-    <!-- Redes sociales -->
-    <div class="card p-3 mb-4">
+    <!-- Redes -->
+    <div class="card p-4 mb-4">
       <h2 class="h4 mb-3">Redes Sociales</h2>
-      <div class="mb-2"><input type="text" id="youtube" class="form-control" placeholder="YouTube"></div>
-      <div class="mb-2"><input type="text" id="twitch" class="form-control" placeholder="Twitch"></div>
-      <div class="mb-2"><input type="text" id="twitter" class="form-control" placeholder="Twitter/X"></div>
-      <div class="mb-2"><input type="text" id="instagram" class="form-control" placeholder="Instagram"></div>
-      <button class="btn btn-primary" onclick="guardarRedes()">Guardar redes</button>
+      <input type="text" id="youtube" class="form-control mb-2" placeholder="YouTube">
+      <input type="text" id="twitch" class="form-control mb-2" placeholder="Twitch">
+      <input type="text" id="twitter" class="form-control mb-2" placeholder="Twitter/X">
+      <input type="text" id="instagram" class="form-control mb-2" placeholder="Instagram">
+      <button class="btn btn-custom" onclick="guardarRedes()">Guardar redes</button>
     </div>
-
-    <a href="index.html" class="btn btn-secondary">🌍 Ir al Blog Público</a>
   </div>
 
   <script>
