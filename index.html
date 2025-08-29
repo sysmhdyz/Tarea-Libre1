@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mi Blog — Anuncios, YouTube & Twitch</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">B</div>
+        <div>
+          <div class="title">Mi Blog · Anuncios / YouTube / Twitch</div>
+          <div class="chip">Publica entradas y guárdalas en tu navegador</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="toggle-dark" class="btn secondary">🌙 Modo oscuro</button>
+        <button id="seed-demo" class="btn ghost">Cargar ejemplos</button>
+        <a class="btn" href="#new-post">➕ Nueva entrada</a>
+      </div>
+    </header>
+
+    <!-- NUEVA ENTRADA -->
+    <section id="new-post" class="card" style="margin-bottom:16px;">
+      <h2 style="margin:4px 0 12px 0;">Crear nueva entrada</h2>
+      <div class="form-grid">
+        <div class="row">
+          <label for="type">Tipo de entrada</label>
+          <select id="type">
+            <option value="anuncio">Anuncio / Texto</option>
+            <option value="youtube">YouTube (pega la URL)</option>
+            <option value="twitch">Twitch (nombre de canal o URL)</option>
+            <option value="imagen">Imagen (URL)</option>
+          </select>
+        </div>
+        <div class="row">
+          <label for="title">Título</label>
+          <input id="title" placeholder="Ej. ¡Nuevo evento este viernes!">
+        </div>
+
+        <div class="row">
+          <label for="media">URL (YouTube/Twitch/Imagen) — opcional</label>
+          <input id="media" placeholder="https://youtu.be/ID ó https://www.twitch.tv/mi_canal ó https://.../foto.png">
+        </div>
+        <div class="row">
+          <label for="tags">Tags (separadas por coma)</label>
+          <input id="tags" placeholder="anuncio, evento, comunidad">
+        </div>
+
+        <div class="row" style="grid-column:1 / -1">
+          <label for="content">Contenido</label>
+          <textarea id="content" placeholder="Escribe el cuerpo del anuncio o una descripción del video/stream."></textarea>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <button id="publish" class="btn">Publicar</button>
+        <span class="chip">Consejo: puedes pegar un enlace de YouTube completo (watch o youtu.be)</span>
+      </div>
+    </section>
+
+    <!-- FILTROS -->
+    <section class="toolbar card" style="margin-bottom:12px;">
+      <div class="filters">
+        <button class="btn small ghost" data-filter="all">Todo</button>
+        <button class="btn small ghost" data-filter="anuncio">Anuncios</button>
+        <button class="btn small ghost" data-filter="youtube">YouTube</button>
+        <button class="btn small ghost" data-filter="twitch">Twitch</button>
+        <button class="btn small ghost" data-filter="imagen">Imágenes</button>
+      </div>
+      <div style="margin-left:auto"></div>
+      <div class="toggle">
+        <label for="search">Buscar</label>
+        <input id="search" placeholder="por título o tag…" style="min-width:220px">
+      </div>
+    </section>
+
+    <!-- LISTA DE POSTS -->
+    <section id="posts" class="grid"></section>
+    <div id="empty" class="empty">No hay entradas todavía. ¡Crea la primera! 🎉</div>
+
+    <!-- PIE -->
+    <footer class="card" style="margin-top:16px;">
+      <div class="row">
+        <strong>Conexiones sociales</strong>
+        <div class="tags">
+          <a class="tag" href="https://youtube.com" target="_blank">YouTube</a>
+          <a class="tag" href="https://twitch.tv" target="_blank">Twitch</a>
+          <a class="tag" href="https://x.com" target="_blank">X / Twitter</a>
+          <a class="tag" href="https://instagram.com" target="_blank">Instagram</a>
+          <a class="tag" href="https://discord.com" target="_blank">Discord</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
